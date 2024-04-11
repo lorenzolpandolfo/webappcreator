@@ -1,11 +1,11 @@
 from customtkinter import CTk
 
-class GUIManager:
+class WindowManager:
     @staticmethod
     def setup(mainapp:CTk):
-        GUIManager.__set_window_resolution__(mainapp)
-        GUIManager.__set_window_title__(mainapp, "WebApp Creator Tool")
-
+        WindowManager.__set_window_resolution__(mainapp)
+        WindowManager.__set_window_title__(mainapp, "WebApp Creator Tool")
+        
     @staticmethod
     def __set_window_resolution__(mainapp):
         mainapp.geometry("600x500")
@@ -13,3 +13,4 @@ class GUIManager:
     @staticmethod
     def __set_window_title__(mainapp:CTk, title:str):
         mainapp.title(title)
+    
