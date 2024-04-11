@@ -1,16 +1,53 @@
 import os
 import winshell
+import requests
 from win32com.client import Dispatch
+from PIL import Image
 
-def create_shortcut(target, shortcut_name, shortcut_path):
+ICONS_PATH = os.path.join(os.getcwd(), "icons")
+
+def convert_to_ico(png_path, ico_path):
+    image = Image.open(png_path)
+    image.save(ico_path)
+
+
+def download_icon(url, save_path):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(save_path, 'wb') as f:
+            f.write(response.content)
+
+def create_shortcut(target, shortcut_name, shortcut_path, icon_path):
     shell = Dispatch('WScript.Shell')
     shortcut = shell.CreateShortCut(os.path.join(shortcut_path, f"{shortcut_name}.lnk"))
     shortcut.Targetpath = target
-    shortcut.Arguments = '--incognito --app=https://www.kernel.org'
+    shortcut.IconLocation = icon_path
+    shortcut.Arguments = f"--app={site_url}"
     shortcut.save()
 
-target_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
-shortcut_name = "My App"
-shortcut_path = os.path.join(winshell.desktop())
+# URL do site
+site_url = "https://chess.com"
+autoTitle = False
+title = site_url.replace("https://www.", "").replace(".com", "").capitalize() if autoTitle else "Chess"
 
-create_shortcut(target_path, shortcut_name, shortcut_path)
+# Caminho local onde o png do icone será salvo
+temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
+icone_final_path = os.path.join(ICONS_PATH, f"{title}.ico")
+
+# Busca o ícone do site a partir da URL
+raw_url = site_url.replace("https://www.", "")
+icon_url = f"https://www.google.com/s2/favicons?domain_url={raw_url}&sz=96"
+download_icon(icon_url, temp_png_path)
+
+# agora o png está salvo, entao precisamos converte-lo para icone
+convert_to_ico(temp_png_path, icone_final_path)
+# removendo o png temporario
+os.remove(temp_png_path)
+
+# Exemplo de uso
+target_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"  # Caminho para o executável do Google Chrome
+shortcut_name = title
+shortcut_path = os.path.join(winshell.desktop()) # o destino do atalho é a área de trabalho
+
+# cria o atalho
+create_shortcut(target_path, shortcut_name, shortcut_path, icone_final_path)

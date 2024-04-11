@@ -1,0 +1,1 @@
+In this folder will be saved all your webapps icons. Please, do not delete it.
