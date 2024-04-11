@@ -35,7 +35,7 @@ def create_shortcut(target, shortcut_name, shortcut_path, icon_path):
 site_url = input("Link: ")
 site_url = f"https://{site_url}" if "https://" not in site_url else site_url
 autoTitle = True
-title = site_url.lower().replace("https://", "").replace("www", "").replace(".com", "").capitalize() if autoTitle else "Canva"
+title = site_url.lower().replace("https://", "").replace("www", "").replace(".com", "").strip(".")[0].capitalize() if autoTitle else input("Título: ")
 
 # Caminho local onde o png do icone será salvo
 temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
