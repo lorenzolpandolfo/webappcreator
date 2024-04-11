@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 class Sufixes:
     countryCodes = [".br", ".us", ".jp", ".ca", ".au", ".de", ".uk", ".fr",
                     ".nl", ".it", ".ru", ".uk", ".nl", ".es", ".ch", ".cn",
@@ -9,7 +10,7 @@ class Sufixes:
                     ".co" , ".io" , ".me",  ".tv"]
     
     @staticmethod
-    def getAllCodes():
-        all = Sufixes.genericCodes.copy()
-        all.extend(Sufixes.countryCodes)
-        return all
+    def get_all_codes():
+        all_codes = Sufixes.genericCodes.copy()
+        all_codes.extend(Sufixes.countryCodes)
+        return all_codes

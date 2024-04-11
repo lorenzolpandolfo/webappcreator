@@ -1,13 +1,14 @@
 import os
 from modules.application import Application
 
+
 class Pathes:
     @staticmethod
-    def getIconsDirectory() -> str:
+    def get_icons_directory() -> str:
         return os.path.abspath(os.path.join(os.getcwd(), "icons"))
 
     @staticmethod
-    def loadImagesPath(title:str):
-        ICONS_PATH = Pathes.getIconsDirectory()
-        Application.icon_path     = os.path.join(ICONS_PATH, f"{title}.ico")
-        Application.temp_png_path = os.path.join(ICONS_PATH, f"{title}.png")
+    def load_images_path(title: str):
+        icons_path = Pathes.get_icons_directory()
+        Application.icon_path     = os.path.join(icons_path, f"{title}.ico")
+        Application.temp_png_path = os.path.join(icons_path, f"{title}.png")

@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
+
 class Prefixes:
-    all = ["https://", "http://"]
+    _all = ["https://", "http://"]
 
     @staticmethod
-    def getAllPrefixes():
-        return Prefixes.all
+    def get_all_prefixes():
+        return Prefixes._all
