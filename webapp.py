@@ -4,18 +4,29 @@ import requests
 from win32com.client import Dispatch
 from PIL import Image
 
-ICONS_PATH = os.path.join(os.getcwd(), "icons")
+from modules.iconGenerator.pathes import Pathes
+from modules.titleGenerator.titleGenerator import TitleGenerator
+from modules.application          import Application
+
+
+
+
+
+
+ICONS_PATH = Pathes.getIconsDirectory()
 
 def convert_to_ico(png_path, ico_path):
     image = Image.open(png_path)
     image.save(ico_path)
 
 
-def download_icon(url, save_path):
+def download_icon(url, save_path) -> bool:
     response = requests.get(url)
-    if response.status_code == 200:
-        with open(save_path, 'wb') as f:
-            f.write(response.content)
+    if not response.status_code == 200:return False
+    with open(save_path, 'wb') as f:
+        f.write(response.content)
+        return True
+    
 
 def create_shortcut(target, shortcut_name, shortcut_path, icon_path):
     print("[-] Gerando o webapp...")
@@ -34,8 +45,12 @@ def create_shortcut(target, shortcut_name, shortcut_path, icon_path):
 # URL do site
 site_url = input("Link: ")
 site_url = f"https://{site_url}" if "https://" not in site_url else site_url
-autoTitle = True
-title = site_url.lower().replace("https://", "").replace("www", "").replace(".com", "").strip(".")[0].capitalize() if autoTitle else input("Título: ")
+Application.url = site_url
+
+title = TitleGenerator.generateTitle(Application.url) if Application.auto_title else input("> Title: ")
+
+
+
 
 # Caminho local onde o png do icone será salvo
 temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
@@ -47,15 +62,19 @@ print("[-] Buscando ícone online...")
 raw_url = site_url.replace("https://www.", "")
 icon_url = f"https://www.google.com/s2/favicons?domain_url={raw_url}&sz=96"
 print("[-] Realizando download do ícone...")
-download_icon(icon_url, temp_png_path)
-print("[-] Download realizado com sucesso.")
 
-# agora o png está salvo, entao precisamos converte-lo para icone
-convert_to_ico(temp_png_path, icone_final_path)
-print("[-] Ícone convertido para .ico")
-# removendo o png temporario
-os.remove(temp_png_path)
-print("[-] Removido arquivo temporário .png")
+if download_icon(icon_url, temp_png_path):
+    print("[-] Download realizado com sucesso.") 
+    # agora o png está salvo, entao precisamos converte-lo para icone
+    convert_to_ico(temp_png_path, icone_final_path)
+    print("[-] Ícone convertido para .ico")
+    # removendo o png temporario
+    os.remove(temp_png_path)
+    print("[-] Removido arquivo temporário .png")
+
+else:
+    print("[x] Erro ao fazer o download do ícone.")
+    icone_final_path = "icons\\default.ico"
 
 # Exemplo de uso
 target_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"  # Caminho para o executável do Google Chrome
