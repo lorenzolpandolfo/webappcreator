@@ -3,6 +3,7 @@ import os
 from PIL import Image
 
 from modules.application import Application
+from modules.iconGenerator.pathes import Pathes
 
 
 def download_icon(url, save_path) -> bool:
@@ -15,7 +16,6 @@ def download_icon(url, save_path) -> bool:
 def convert_to_ico(png_path, ico_path):
     image = Image.open(png_path)
     image.save(ico_path)
-    print("ICO PATH: ", ico_path)
 
 
 class IconGenerator:
@@ -35,4 +35,4 @@ class IconGenerator:
 
         else:
             print("[x] Erro ao fazer o download do ícone.")
-            Application.icon_path = "icons\\default.ico"
+            Application.icon_path = os.path.join(Pathes.get_icons_directory(), "default.ico")

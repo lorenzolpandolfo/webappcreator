@@ -112,8 +112,9 @@ class TopFrame(CTkFrame):
     def create_button_callback(self, *args):
         url = self.textbox_url.get("1.0", "end-1c")
         browser_path = self.textbox_browser_path.get("1.0", "end-1c")
+        manual_title = self.textbox_title.get("1.0", "end-1c")
         if url != "" and browser_path != "":
-            WebAppCreator.create_web_app(url, browser_path)
+            WebAppCreator.create_web_app(url, browser_path, manual_title)
         else:
             print("a url está vazia")
             

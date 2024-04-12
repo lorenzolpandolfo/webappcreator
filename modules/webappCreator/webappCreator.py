@@ -12,11 +12,15 @@ ICONS_PATH = Pathes.get_icons_directory()
 
 class WebAppCreator:
     @staticmethod
-    def create_web_app(url: str, browser_path: str):
+    def create_web_app(url: str, browser_path: str, manual_title: str):
         Application.browser_path = browser_path
         Application.url = url
 
-        title = TitleGenerator.generate_title(Application.url) if Application.auto_title else "untitled"
+        if Application.auto_title:
+            title = TitleGenerator.generate_title(Application.url)
+        else:
+            title = manual_title if manual_title != "" else "untitled"
+
         Application.title = title
 
         temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
@@ -44,7 +48,7 @@ class WebAppCreator:
             shortcut = shell.CreateShortCut(os.path.join(shortcut_path, f"{Application.title}.lnk"))
             shortcut.Targetpath = Application.browser_path
             shortcut.IconLocation = Application.icon_path
-            shortcut.Arguments = f"--app={Application.url}"
+            shortcut.Arguments = f"--app=https://{Application.url}" if "https://" not in Application.url else f"--app={Application.url}"
             shortcut.save()
         except Exception as e:
             print(f"[x] Houve um erro ao gerar o webapp:\n{e}")
