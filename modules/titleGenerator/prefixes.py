@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 class Prefixes:
-    _all = ["https://", "http://", "www."]
+    _all = ["https://", "http://", "www.", "web.", "chat."]
 
     @staticmethod
     def get_all_prefixes():

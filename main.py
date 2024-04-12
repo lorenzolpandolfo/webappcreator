@@ -19,7 +19,6 @@ class MainApp(CTk):
         
         self.topFrame = TopFrame(self)
         self.topFrame.grid(row=0, column=0, sticky="nsew")
-        #self.topFrame.configure(fg_color="red")
 
 root = MainApp()
 root.mainloop()
