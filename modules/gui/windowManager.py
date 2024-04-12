@@ -8,7 +8,7 @@ class WindowManager:
         
     @staticmethod
     def __set_window_resolution__(mainapp):
-        mainapp.geometry("600x500")
+        mainapp.geometry("500x480")
 
     @staticmethod
     def __set_window_title__(mainapp:CTk, title:str):
