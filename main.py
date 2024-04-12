@@ -12,13 +12,13 @@ class MainApp(CTk):
         WindowManager.setup(self)
         self.load_frames()
 
-
     def load_frames(self):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
-        
+
         self.topFrame = TopFrame(self)
         self.topFrame.grid(row=0, column=0, sticky="nsew")
+
 
 root = MainApp()
 root.mainloop()

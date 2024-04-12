@@ -7,35 +7,33 @@ from modules.iconGenerator.pathes import Pathes
 from modules.titleGenerator.titleGenerator import TitleGenerator
 from modules.iconGenerator.iconGenerator import IconGenerator
 
-
 ICONS_PATH = Pathes.get_icons_directory()
+
 
 class WebAppCreator:
     @staticmethod
     def create_web_app(url: str, browser_path: str, manual_title: str):
-        Application.browser_path = browser_path
-        Application.url = url
-
         if Application.auto_title:
-            title = TitleGenerator.generate_title(Application.url)
+            title = TitleGenerator.generate_title(url)
         else:
             title = manual_title if manual_title != "" else "untitled"
 
+        Pathes.load_images_path(title)
+        # temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
+        # icone_final_path = os.path.join(ICONS_PATH, f"{title}.ico")
+        # Application.icon_path = icone_final_path
+        # Application.temp_png_path = temp_png_path
+
+        # print(Application.auto_title)
+        # print(Application.browser_path)
+        # print(Application.icon_path)
+        # print(Application.temp_png_path)
+        # print(Application.url)
+        # print(Application.title)
+
         Application.title = title
-
-        temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
-        icone_final_path = os.path.join(ICONS_PATH, f"{title}.ico")
-
-        Application.icon_path = icone_final_path
-        Application.temp_png_path = temp_png_path
-        
-        print(Application.auto_title)
-        print(Application.browser_path)
-        print(Application.icon_path)
-        print(Application.temp_png_path)
-        print(Application.url)
-        print(Application.title)
-
+        Application.browser_path = browser_path
+        Application.url = url
         IconGenerator.generate_icon(url)
         shortcut_path = os.path.join(winshell.desktop())
         WebAppCreator.create_shortcut(shortcut_path)

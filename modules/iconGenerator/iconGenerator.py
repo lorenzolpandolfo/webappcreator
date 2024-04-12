@@ -13,6 +13,7 @@ def download_icon(url, save_path) -> bool:
         f.write(response.content)
         return True
 
+
 def convert_to_ico(png_path, ico_path):
     image = Image.open(png_path)
     image.save(ico_path)
@@ -25,14 +26,7 @@ class IconGenerator:
         temp_png_path = Application.temp_png_path
 
         if download_icon(icon_url, temp_png_path):
-            print("[-] Download realizado com sucesso.")
-            # agora o png está salvo, entao precisamos converte-lo para icone
             convert_to_ico(temp_png_path, Application.icon_path)
-            print("[-] Ícone convertido para .ico")
-            # removendo o png temporario
             os.remove(temp_png_path)
-            print("[-] Removido arquivo temporário .png")
-
         else:
-            print("[x] Erro ao fazer o download do ícone.")
             Application.icon_path = os.path.join(Pathes.get_icons_directory(), "default.ico")
