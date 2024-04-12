@@ -1,5 +1,7 @@
 from customtkinter import CTkFrame, CTkTabview, CTkTextbox, CTkLabel, CTkButton, CTkSwitch, StringVar, CTkComboBox, CTkCheckBox
 from modules.browsers.defaultPathes import DefaultBrowsersPathes
+from modules.application import Application
+from modules.webappCreator.webappCreator import WebAppCreator
 
 class TopFrame(CTkFrame):
     def __init__(self, master):
@@ -83,17 +85,19 @@ class TopFrame(CTkFrame):
 
 
     def create_run_button(self):
-        self.button_run = CTkButton(self.final_frame, text="Criar")
+        self.button_run = CTkButton(self.final_frame, text="Criar", command=self.create_button_callback)
         self.button_run.grid(row=0, column=0, padx=10, pady=10)
 
 
     def switch_title_widgets_visibility(self):
         normal = self.label_title.cget("state") == "normal"
+        Application.auto_title = normal
         if (normal):
             self.label_title.configure(state="disabled")
             self.textbox_title.delete("1.0", "end")
             self.textbox_title.insert("1.0", "Título automático ativo")
             self.textbox_title.configure(state="disabled", text_color="gray")
+
         else:
             self.label_title.configure(state="normal")
             self.textbox_title.configure(state="normal", text_color="black")
@@ -105,3 +109,11 @@ class TopFrame(CTkFrame):
         self.textbox_browser_path.insert("1.0", DefaultBrowsersPathes.get_default_path(event).replace("\\\\", "/"))
 
 
+    def create_button_callback(self, *args):
+        url = self.textbox_url.get("1.0", "end-1c")
+        browser_path = self.textbox_browser_path.get("1.0", "end-1c")
+        if url != "" and browser_path != "":
+            WebAppCreator.create_web_app(url, browser_path)
+        else:
+            print("a url está vazia")
+            
