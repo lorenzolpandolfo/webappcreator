@@ -1,5 +1,5 @@
 import os
-import pywin32
+from win32com.client import Dispatch
 from modules.application import Application
 
 
@@ -31,7 +31,7 @@ class FileManager:
 
     @staticmethod
     def _read_shortcut_argument_(shortcut_path: str):
-        shell = win32com.client.Dispatch("WScript.Shell")
+        shell = Dispatch('WScript.Shell')
         atalho = shell.CreateShortCut(shortcut_path)
         print(atalho.Arguments)
         print(atalho.Targetpath)
