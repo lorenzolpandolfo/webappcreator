@@ -1,0 +1,15 @@
+{
+  "tab_create": "Criar",
+  "tab_remove": "Remover",
+
+  "label_url": "Insira o link",
+  "label_title": "Insira o título do WebApp",
+  "label_browser_selector": "Selecione o Navegador",
+  "label_browser_path": "Confira o diretório do navegador:",
+
+  "button_select_local_icon": "Procurar ícone local",
+  "button_create_webapp": "Criar",
+
+  "switch_auto_title": "Título automático",
+  "checkbox_incognito_mode": "Modo anônimo"
+}

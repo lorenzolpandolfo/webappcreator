@@ -1,0 +1,16 @@
+{
+  "tab_create": "Erstellen",
+  "tab_remove": "Entfernen",
+
+  "label_url": "URL eingeben",
+  "label_title": "WebApp-Titel eingeben",
+  "label_browser_selector": "Browser auswählen",
+  "label_browser_path": "Browserpfad überprüfen:",
+
+  "button_select_local_icon": "Lokales Symbol durchsuchen",
+  "button_create_webapp": "Erstellen",
+
+  "switch_auto_title": "Automatischer Titel",
+  "checkbox_incognito_mode": "Inkognito-Modus",
+  "auto_title_warning": "Automatischer Titel ist aktiv"
+}

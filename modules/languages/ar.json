@@ -1,0 +1,16 @@
+{
+  "tab_create": "إنشاء",
+  "tab_remove": "إزالة",
+
+  "label_url": "أدخل عنوان الويب",
+  "label_title": "أدخل عنوان WebApp",
+  "label_browser_selector": "اختر المتصفح",
+  "label_browser_path": "تحقق من مسار المتصفح:",
+
+  "button_select_local_icon": "تصفح الرمز المحلي",
+  "button_create_webapp": "إنشاء",
+
+  "switch_auto_title": "عنوان تلقائي",
+  "checkbox_incognito_mode": "وضع التصفح المتخفي",
+  "auto_title_warning": "عنوان تلقائي نشط"
+}

@@ -1,0 +1,16 @@
+{
+  "tab_create": "Create",
+  "tab_remove": "Remove",
+
+  "label_url": "Enter URL",
+  "label_title": "Enter WebApp Title",
+  "label_browser_selector": "Select Browser",
+  "label_browser_path": "Verify Browser Path:",
+
+  "button_select_local_icon": "Browse Local Icon",
+  "button_create_webapp": "Create",
+
+  "switch_auto_title": "Auto Title",
+  "checkbox_incognito_mode": "Incognito Mode",
+  "auto_title_warning": "Auto Title is active"
+}

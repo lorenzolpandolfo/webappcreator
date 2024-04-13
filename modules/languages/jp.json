@@ -1,0 +1,16 @@
+{
+  "tab_create": "作成",
+  "tab_remove": "削除",
+
+  "label_url": "URLを入力",
+  "label_title": "WebAppのタイトルを入力",
+  "label_browser_selector": "ブラウザを選択",
+  "label_browser_path": "ブラウザのパスを確認してください：",
+
+  "button_select_local_icon": "ローカルアイコンを参照",
+  "button_create_webapp": "作成",
+
+  "switch_auto_title": "自動タイトル",
+  "checkbox_incognito_mode": "シークレットモード",
+  "auto_title_warning": "自動タイトルが有効です"
+}

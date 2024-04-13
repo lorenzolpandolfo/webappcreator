@@ -1,0 +1,16 @@
+{
+  "tab_create": "Создать",
+  "tab_remove": "Удалить",
+
+  "label_url": "Введите URL",
+  "label_title": "Введите заголовок WebApp",
+  "label_browser_selector": "Выберите браузер",
+  "label_browser_path": "Проверьте путь к браузеру:",
+
+  "button_select_local_icon": "Обзор локальной иконки",
+  "button_create_webapp": "Создать",
+
+  "switch_auto_title": "Автоматический заголовок",
+  "checkbox_incognito_mode": "Режим инкогнито",
+  "auto_title_warning": "Автоматический заголовок активен"
+}
