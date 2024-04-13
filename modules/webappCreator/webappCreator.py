@@ -1,4 +1,5 @@
 import os
+
 import winshell
 from win32com.client import Dispatch
 
@@ -6,6 +7,7 @@ from modules.application import Application
 from modules.iconGenerator.pathes import Pathes
 from modules.titleGenerator.titleGenerator import TitleGenerator
 from modules.iconGenerator.iconGenerator import IconGenerator
+from modules.logManager.logManager import logger
 
 ICONS_PATH = Pathes.get_icons_directory()
 
@@ -28,19 +30,22 @@ class WebAppCreator:
 
     @staticmethod
     def create_shortcut(shortcut_path):
-        print("[-] Gerando o webapp...")
+        logger.info("Initializing webapp creation")
         try:
+            logger.info("No errors detected in try-except block")
             shell = Dispatch('WScript.Shell')
-            shortcut = shell.CreateShortCut(os.path.join(shortcut_path, f"{Application.title}.lnk"))
+            final_shortcut_path = os.path.join(shortcut_path, f"{Application.title}.lnk")
+            shortcut = shell.CreateShortCut(final_shortcut_path)
             shortcut.Targetpath = Application.browser_path
             shortcut.IconLocation = Application.icon_path
-
             argument = f"--app=https://{Application.url}" if "https://" not in Application.url else f"--app={Application.url}"
             if Application.incognito:
                 argument = f"--incognito {argument}"
             shortcut.Arguments = argument
             shortcut.save()
+            logger.info("Shortcut created successfully: %s", final_shortcut_path)
+
         except Exception as e:
-            print(f"[x] Houve um erro ao gerar o webapp:\n{e}")
+            logger.error("An error ocurred while creating shortcut: %s", str(e))
             return
-        print("[!] Webapp gerado com sucesso!")
+        logger.info("WebApp created sucessfully")

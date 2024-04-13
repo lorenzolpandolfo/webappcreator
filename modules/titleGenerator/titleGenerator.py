@@ -1,24 +1,25 @@
 from modules.titleGenerator.sufixes import Sufixes
 from modules.titleGenerator.prefixes import Prefixes
-
+from modules.logManager.logManager import logger
 BLANK_SPACE = ""
 
 
 class TitleGenerator:
     @staticmethod
     def generate_title(url) -> str:
+        logger.info("Generating title")
         url = TitleGenerator.__cleaning_url_prefixes__(url)
         url = TitleGenerator.__cleaning_url_sufixes__(url)
-        return url.capitalize()
+        title = url.capitalize()
+        logger.info(f"Title generated: {title}")
+        return title
 
     @staticmethod
     def __cleaning_url_sufixes__(url: str) -> str:
         for sufix in Sufixes.get_all_codes():
             if "." not in url: break
             if sufix in url:
-                print(url)
                 url = url.replace(sufix, BLANK_SPACE)
-                print(url, sufix)
         return url
 
     @staticmethod

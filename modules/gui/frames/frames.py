@@ -3,7 +3,7 @@ from modules.browsers.defaultPathes import DefaultBrowsersPathes
 from modules.application import Application
 from modules.webappCreator.webappCreator import WebAppCreator
 from modules.languages.languageManager import LanguageManager
-
+from modules.logManager.logManager import logger
 Language = LanguageManager.setup()
 
 
@@ -11,6 +11,7 @@ class TopFrame(CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
+        logger.info("Initializing TopFrame")
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
@@ -47,6 +48,8 @@ class TopFrame(CTkFrame):
         self.combobox_callback("Google Chrome")
 
         self.create_run_button()
+        logger.info("TopFrame created sucessfully")
+
 
     def create_right_frame_widgets(self):
         self.button_select_icon = CTkButton(self.right_frame, text=Language.button_select_local_icon)

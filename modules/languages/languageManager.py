@@ -2,6 +2,8 @@ import os
 import json
 from dataclasses import dataclass
 
+from modules.logManager.logManager import logger
+
 
 @dataclass
 class Language:
@@ -22,13 +24,16 @@ class Language:
 
     @classmethod
     def load_language(cls, json_data):
+        logger.info("Language json loaded")
         return cls(**json_data)
 
 
 class LanguageManager:
     @staticmethod
     def setup():
+        logger.info("LanguageManager setup")
         language = LanguageManager.__get_preferenced_language__()
+        logger.info(f"Selected language: {language}")
         translation = LanguageManager.__load_language__(language)
         return Language.load_language(translation)
 
