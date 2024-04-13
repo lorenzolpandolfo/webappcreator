@@ -1,10 +1,14 @@
-from customtkinter import CTkFrame, CTkTabview, CTkTextbox, CTkLabel, CTkButton, CTkSwitch, StringVar, CTkComboBox, CTkCheckBox
+from customtkinter import CTkFrame, CTkTabview, CTkTextbox, CTkLabel, CTkButton, CTkSwitch, StringVar, CTkComboBox, CTkCheckBox, CTkImage
+from PIL import Image
+import os
+
 from modules.browsers.defaultPathes import DefaultBrowsersPathes
 from modules.application import Application
 from modules.webappCreator.webappCreator import WebAppCreator
 from modules.languages.languageManager import LanguageManager
 from modules.logManager.logManager import logger
-from modules.removeWebapps.fileManager import FileManager
+from modules.removeWebapps.currentWebapps import CurrentWebapps
+from modules.iconGenerator.pathes import Pathes
 Language = LanguageManager.setup()
 
 
@@ -16,15 +20,18 @@ class TopFrame(CTkFrame):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.tabview = CTkTabview(self)
+        self.tabview = CTkTabview(self, command=)
         tabview_create = self.tabview.add(Language.tab_create)
         tabview_remove = self.tabview.add(Language.tab_remove)
 
-        self.tabview.grid(row=0, column=0, sticky="nsew", padx=5, pady=(0,5))
+        self.tabview.grid(row=0, column=0, sticky="nsew")
 
         tabview_create.grid_columnconfigure(0, weight=1)
+        tabview_remove.grid_columnconfigure(0, weight=1)
+        tabview_remove.grid_rowconfigure(0, weight=1)
 
         self.create_tab = tabview_create
+        self.remove_tab = tabview_remove
 
         self.create_frames()
         self.configure_frames()
@@ -54,8 +61,13 @@ class TopFrame(CTkFrame):
         self.button_check_webapps = CTkButton(self.final_frame, text="Checar se existem webapps", command=self.check_webapps_callback)
         self.button_check_webapps.grid(row=0, column=1, padx=10, pady=10)
 
+    def tabview_click_callback(self):
+        webapps_list = self.check_webapps_callback()
+        self.create_webapp_view(webapps_list)
+        print("callback do tab")
+
     def check_webapps_callback(self):
-        return FileManager.check_if_webapp_exists()
+        return CurrentWebapps.list_created_webapps()
 
     def create_right_frame_widgets(self):
         self.button_select_icon = CTkButton(self.right_frame, text=Language.button_select_local_icon)
@@ -67,15 +79,34 @@ class TopFrame(CTkFrame):
     def create_frames(self):
         self.right_frame = CTkFrame(self.create_tab)
         self.right_frame.grid(row=0, column=1, sticky="nsew", padx=10, pady=10)
-
         self.left_frame = CTkFrame(self.create_tab)
         self.left_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
-
         self.bottom_frame = CTkFrame(self.create_tab)
         self.bottom_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10, columnspan=2)
-
         self.final_frame = CTkFrame(self.create_tab)
         self.final_frame.grid(row=2, column=0, sticky="nsew", padx=10, pady=10, columnspan=2)
+
+        self.main_frame = CTkFrame(self.remove_tab)
+        self.main_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+
+        #self.webapp_frame = CTkFrame(self.main_frame, height=80)
+        #self.webapp_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
+
+    def create_webapp_view(self, webapp_list: list):
+        column = 0
+        aux_row = 0
+        for row in range(0, len(webapp_list)):
+            if (row != 0) and (row % 5) == 0:
+                aux_row -= 4
+                column += 1
+            else:
+                aux_row += 1
+
+            webapp_instance = WebAppFrame(self.main_frame, height=60)
+            webapp_instance.grid(row=aux_row, column=column, sticky="ew", padx=(5,0), pady=(5,0))
+            Application.current_webapps.append(webapp_instance)
+        print(Application.current_webapps)
+
 
     def configure_frames(self):
         self.left_frame.grid_rowconfigure(0, weight=1)
@@ -130,3 +161,25 @@ class TopFrame(CTkFrame):
         else:
             print("a url está vazia")
             
+
+class WebAppFrame(CTkFrame):
+    def __init__(self, master, *args, **kwargs):
+        super().__init__(master, *args, **kwargs)
+
+        self.configure(bg_color="red")
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+        self.label_title = CTkLabel(self, text="Meu webapp")
+        self.label_title.grid(row=0, column=0)
+
+        self.label_browser = CTkLabel(self, text="Chromium")
+        self.label_browser.grid(row=1, column=0)
+
+        self.button_remove = CTkButton(self, text="Remover")
+        self.button_remove.grid(row=1, column=1)
+
+        icon = Image.open(os.path.join(Pathes.get_icons_directory(), "titulo"))
+        self.image_icon = CTkImage(light_image=icon, dark_image=icon)
+

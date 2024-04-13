@@ -14,6 +14,7 @@ class Application:
     incognito: bool = False
     shortcut_path = os.path.join(winshell.desktop())
     signature: str = "WeBaPpCrEaToR"
+    current_webapps = []
 
     @staticmethod
     def setup(mainapp):

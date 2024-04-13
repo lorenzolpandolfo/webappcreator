@@ -1,6 +1,7 @@
 import os
 from modules.application import Application
 
+
 class Pathes:
     @staticmethod
     def get_icons_directory() -> str:
