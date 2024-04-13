@@ -4,6 +4,7 @@ from modules.application import Application
 from modules.webappCreator.webappCreator import WebAppCreator
 from modules.languages.languageManager import LanguageManager
 from modules.logManager.logManager import logger
+from modules.removeWebapps.fileManager import FileManager
 Language = LanguageManager.setup()
 
 
@@ -50,6 +51,11 @@ class TopFrame(CTkFrame):
         self.create_run_button()
         logger.info("TopFrame created sucessfully")
 
+        self.button_check_webapps = CTkButton(self.final_frame, text="Checar se existem webapps", command=self.check_webapps_callback)
+        self.button_check_webapps.grid(row=0, column=1, padx=10, pady=10)
+
+    def check_webapps_callback(self):
+        return FileManager.check_if_webapp_exists()
 
     def create_right_frame_widgets(self):
         self.button_select_icon = CTkButton(self.right_frame, text=Language.button_select_local_icon)

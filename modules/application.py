@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-
+import os
+#import winshell
 
 @dataclass
 class Application:
@@ -11,6 +12,7 @@ class Application:
     auto_title: bool = True
     mainapp = None
     incognito: bool = False
+    shortcut_path = os.path.join(winshell.desktop())
 
     @staticmethod
     def setup(mainapp):

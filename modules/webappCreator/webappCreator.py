@@ -1,6 +1,5 @@
 import os
 
-import winshell
 from win32com.client import Dispatch
 
 from modules.application import Application
@@ -25,16 +24,15 @@ class WebAppCreator:
         Application.browser_path = browser_path
         Application.url = url
         IconGenerator.generate_icon(url)
-        shortcut_path = os.path.join(winshell.desktop())
-        WebAppCreator.create_shortcut(shortcut_path)
+        WebAppCreator.create_shortcut()
 
     @staticmethod
-    def create_shortcut(shortcut_path):
+    def create_shortcut():
         logger.info("Initializing webapp creation")
         try:
             logger.info("No errors detected in try-except block")
             shell = Dispatch('WScript.Shell')
-            final_shortcut_path = os.path.join(shortcut_path, f"{Application.title}.lnk")
+            final_shortcut_path = os.path.join(Application.shortcut_path, f"{Application.title}.lnk")
             shortcut = shell.CreateShortCut(final_shortcut_path)
             shortcut.Targetpath = Application.browser_path
             shortcut.IconLocation = Application.icon_path
