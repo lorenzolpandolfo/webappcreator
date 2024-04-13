@@ -1,7 +1,7 @@
 import os
 from win32com.client import Dispatch
 from modules.application import Application
-
+from pylnk3 import Lnk
 
 class FileManager:
     @staticmethod
