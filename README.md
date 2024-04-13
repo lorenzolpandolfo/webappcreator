@@ -26,7 +26,6 @@ Most of the translations were made with artificial intelligence. If you are a na
 
 ### TODO:
 - Firefox currently not working
-- Incognito mode not implemented yet
 - Manual icon choose not implemented yet
 - Log to troubleshooting
 - "Remove" tab to remove your created webapps
