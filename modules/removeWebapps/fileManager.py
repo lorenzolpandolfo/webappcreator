@@ -9,16 +9,14 @@ class FileManager:
         files = os.listdir(Application.shortcut_path)
         print(f"lendo o diretorio {Application.shortcut_path}")
         for file in files:
-            print(file)
             if file.endswith("lnk"):
                 shortcut_path = os.path.join(Application.shortcut_path, file)
-                print(f"{file} termina com lnk ent é atalho")
-                print("o seu path é ", shortcut_path)
-                arguments = FileManager.read_shortcut_argument(shortcut_path)
-                print("os argumentos sao: ", arguments)
-                file_id = arguments.strip("ID:"[1])
+                arguments = FileManager._read_shortcut_argument_(shortcut_path)
+                if " WEBAPPCREATORID=" not in arguments:
+                    continue
+                file_id = arguments.strip(" WEBAPPCREATORID="[1])
                 print("o id é: ", file_id)
-                return FileManager.check_if_id_registered(file_id)
+                return FileManager._check_if_id_registered_(file_id)
         return False
 
     @staticmethod
@@ -33,6 +31,4 @@ class FileManager:
     def _read_shortcut_argument_(shortcut_path: str):
         shell = Dispatch('WScript.Shell')
         atalho = shell.CreateShortCut(shortcut_path)
-        print(atalho.Arguments)
-        print(atalho.Targetpath)
-        return atalho.Arguments
+        return atalho.Targetpath
