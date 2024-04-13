@@ -19,6 +19,7 @@ Currently, the interface supports:
 - Spanish
 - Arabian
 - Japanese
+- Korean
 - Dutch
 
 Most of the translations were made with artificial intelligence. If you are a native speaker and would like to improve it, feel free to open an issue.
