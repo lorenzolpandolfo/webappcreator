@@ -19,18 +19,6 @@ class WebAppCreator:
             title = manual_title if manual_title != "" else "untitled"
 
         Pathes.load_images_path(title)
-        # temp_png_path = os.path.join(ICONS_PATH, f"{title}temp.png")
-        # icone_final_path = os.path.join(ICONS_PATH, f"{title}.ico")
-        # Application.icon_path = icone_final_path
-        # Application.temp_png_path = temp_png_path
-
-        # print(Application.auto_title)
-        # print(Application.browser_path)
-        # print(Application.icon_path)
-        # print(Application.temp_png_path)
-        # print(Application.url)
-        # print(Application.title)
-
         Application.title = title
         Application.browser_path = browser_path
         Application.url = url
@@ -46,7 +34,11 @@ class WebAppCreator:
             shortcut = shell.CreateShortCut(os.path.join(shortcut_path, f"{Application.title}.lnk"))
             shortcut.Targetpath = Application.browser_path
             shortcut.IconLocation = Application.icon_path
-            shortcut.Arguments = f"--app=https://{Application.url}" if "https://" not in Application.url else f"--app={Application.url}"
+
+            argument = f"--app=https://{Application.url}" if "https://" not in Application.url else f"--app={Application.url}"
+            if Application.incognito:
+                argument = f"--incognito {argument}"
+            shortcut.Arguments = argument
             shortcut.save()
         except Exception as e:
             print(f"[x] Houve um erro ao gerar o webapp:\n{e}")

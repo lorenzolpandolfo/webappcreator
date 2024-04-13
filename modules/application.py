@@ -10,6 +10,7 @@ class Application:
     browser_path: str
     auto_title: bool = True
     mainapp = None
+    incognito: bool = False
 
     @staticmethod
     def setup(mainapp):

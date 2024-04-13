@@ -88,19 +88,17 @@ class TopFrame(CTkFrame):
         self.textbox_url = CTkTextbox(self.left_frame, width=200, height=30)
         self.textbox_url.grid(row=1, column=0)
 
-
     def create_run_button(self):
         self.button_run = CTkButton(self.final_frame, text=Language.button_create_webapp, command=self.create_button_callback)
         self.button_run.grid(row=0, column=0, padx=10, pady=10)
 
-
     def switch_title_widgets_visibility(self):
         normal = self.label_title.cget("state") == "normal"
         Application.auto_title = normal
-        if (normal):
+        if normal:
             self.label_title.configure(state="disabled")
             self.textbox_title.delete("1.0", "end")
-            self.textbox_title.insert("1.0", "Título automático ativo")
+            self.textbox_title.insert("1.0", Language.auto_title_warning)
             self.textbox_title.configure(state="disabled", text_color="gray")
 
         else:
@@ -113,12 +111,12 @@ class TopFrame(CTkFrame):
         self.textbox_browser_path.delete("1.0", "end")
         self.textbox_browser_path.insert("1.0", DefaultBrowsersPathes.get_default_path(event).replace("\\\\", "/"))
 
-
     def create_button_callback(self, *args):
         url = self.textbox_url.get("1.0", "end-1c")
         browser_path = self.textbox_browser_path.get("1.0", "end-1c")
         manual_title = self.textbox_title.get("1.0", "end-1c")
         if url != "" and browser_path != "":
+            Application.incognito = self.checkbox_incognito.get()
             WebAppCreator.create_web_app(url, browser_path, manual_title)
         else:
             print("a url está vazia")
