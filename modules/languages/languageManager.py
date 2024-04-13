@@ -27,7 +27,8 @@ class Language:
 
 class LanguageManager:
     @staticmethod
-    def load_language(language: str):
+    def setup():
+        language = LanguageManager.__get_preferenced_language__()
         translation = LanguageManager.__load_language__(language)
         return Language.load_language(translation)
 
@@ -37,3 +38,10 @@ class LanguageManager:
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf8") as file:
                 return json.load(file)
+
+    @staticmethod
+    def __get_preferenced_language__():
+        file_path = os.path.join(os.getcwd(), "preferences.json")
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf8") as file:
+                return json.load(file)["language"]

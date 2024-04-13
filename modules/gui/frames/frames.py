@@ -4,7 +4,7 @@ from modules.application import Application
 from modules.webappCreator.webappCreator import WebAppCreator
 from modules.languages.languageManager import LanguageManager
 
-Language = LanguageManager.load_language("eng")
+Language = LanguageManager.setup()
 
 
 class TopFrame(CTkFrame):
