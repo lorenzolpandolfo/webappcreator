@@ -11,7 +11,6 @@ Provides you a graphical user interface to create webapps in a simple way.
 - Firefox currently not working
 - Incognito mode not implemented yet
 - Manual icon choose not implemented yet
-- Languages support
 - Log to troubleshooting
 - "Remove" tab to remove your created webapps
 - Some code cleaning
