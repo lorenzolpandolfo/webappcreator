@@ -1,0 +1,16 @@
+{
+  "tab_create": "만들기 (Mandeulgi)",
+  "tab_remove": "제거 (Jegeo)",
+
+  "label_url": "URL 입력 (URL Ibneup)",
+  "label_title": "웹앱 제목 입력 (Webeop Jeomog Ibneup)",
+  "label_browser_selector": "브라우저 선택 (Beuraujeoseo Seontae)",
+  "label_browser_path": "브라우저 경로 확인: (Beuraujeoseo Gyeongro Hakin:)",
+
+  "button_select_local_icon": "로컬 아이콘 찾기 (Rokel Ikon Jakgi)",
+  "button_create_webapp": "만들기 (Mandeulgi)",
+
+  "switch_auto_title": "자동 제목 (Jadon Jeomog)",
+  "checkbox_incognito_mode": "시크릿 모드 (Sigeurit Modeo)",
+  "auto_title_warning": "자동 제목 활성화 (Jadon Jeomog HwalSeongHwa)"
+}
