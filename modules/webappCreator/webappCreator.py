@@ -39,6 +39,7 @@ class WebAppCreator:
             argument = f"--app=https://{Application.url}" if "https://" not in Application.url else f"--app={Application.url}"
             if Application.incognito:
                 argument = f"--incognito {argument}"
+            argument = f"{argument} {Application.signature}"
             shortcut.Arguments = argument
             shortcut.save()
             logger.info("Shortcut created successfully: %s", final_shortcut_path)

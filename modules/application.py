@@ -13,6 +13,7 @@ class Application:
     mainapp = None
     incognito: bool = False
     shortcut_path = os.path.join(winshell.desktop())
+    signature: str = "WeBaPpCrEaToR"
 
     @staticmethod
     def setup(mainapp):
