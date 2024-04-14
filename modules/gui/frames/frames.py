@@ -1,6 +1,8 @@
-from customtkinter import CTkFrame, CTkTabview, CTkTextbox, CTkLabel, CTkButton, CTkSwitch, StringVar, CTkComboBox, CTkCheckBox, CTkImage
+from customtkinter import CTkFrame, CTkTabview, CTkTextbox, CTkLabel, CTkButton, CTkSwitch, StringVar, CTkComboBox, CTkCheckBox, CTkImage, CTkFont, ThemeManager
+import customtkinter
 from PIL import Image
 import os
+from pylnk3 import Lnk
 
 from modules.browsers.defaultPathes import DefaultBrowsersPathes
 from modules.application import Application
@@ -20,7 +22,7 @@ class TopFrame(CTkFrame):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.tabview = CTkTabview(self, command=)
+        self.tabview = CTkTabview(self, command=self.tabview_click_callback)
         tabview_create = self.tabview.add(Language.tab_create)
         tabview_remove = self.tabview.add(Language.tab_remove)
 
@@ -58,16 +60,15 @@ class TopFrame(CTkFrame):
         self.create_run_button()
         logger.info("TopFrame created sucessfully")
 
-        self.button_check_webapps = CTkButton(self.final_frame, text="Checar se existem webapps", command=self.check_webapps_callback)
-        self.button_check_webapps.grid(row=0, column=1, padx=10, pady=10)
-
     def tabview_click_callback(self):
-        webapps_list = self.check_webapps_callback()
+        webapps_list = CurrentWebapps.list_created_webapps()
+        self.delete_all_webapp_frames()
         self.create_webapp_view(webapps_list)
-        print("callback do tab")
-
-    def check_webapps_callback(self):
-        return CurrentWebapps.list_created_webapps()
+    
+    def delete_all_webapp_frames(self):
+        for webapp in Application.current_webapps:
+            webapp.destroy()
+        Application.current_webapps = []
 
     def create_right_frame_widgets(self):
         self.button_select_icon = CTkButton(self.right_frame, text=Language.button_select_local_icon)
@@ -89,9 +90,6 @@ class TopFrame(CTkFrame):
         self.main_frame = CTkFrame(self.remove_tab)
         self.main_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
 
-        #self.webapp_frame = CTkFrame(self.main_frame, height=80)
-        #self.webapp_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
-
     def create_webapp_view(self, webapp_list: list):
         column = 0
         aux_row = 0
@@ -102,11 +100,9 @@ class TopFrame(CTkFrame):
             else:
                 aux_row += 1
 
-            webapp_instance = WebAppFrame(self.main_frame, height=60)
+            webapp_instance = WebAppFrame(self.main_frame, webapp_list[row], height=60)
             webapp_instance.grid(row=aux_row, column=column, sticky="ew", padx=(5,0), pady=(5,0))
             Application.current_webapps.append(webapp_instance)
-        print(Application.current_webapps)
-
 
     def configure_frames(self):
         self.left_frame.grid_rowconfigure(0, weight=1)
@@ -143,7 +139,8 @@ class TopFrame(CTkFrame):
 
         else:
             self.label_title.configure(state="normal")
-            self.textbox_title.configure(state="normal", text_color="black")
+            text_color = "black" if (customtkinter.get_appearance_mode() == "light") else "white"
+            self.textbox_title.configure(state="normal", text_color=text_color)
             self.textbox_title.delete("1.0", "end")
 
     def combobox_callback(self, event):
@@ -163,23 +160,55 @@ class TopFrame(CTkFrame):
             
 
 class WebAppFrame(CTkFrame):
-    def __init__(self, master, *args, **kwargs):
+    def __init__(self, master, aslnk: Lnk,  *args, **kwargs):
         super().__init__(master, *args, **kwargs)
+        self.browser: str = None
+        self.data: Lnk = aslnk
+        self.title = os.path.basename(self.data.file).replace(".lnk", "")
 
-        self.configure(bg_color="red")
+        self.configure_grid()
+        self.get_webapp_browser()
+        self.create_widgets()
 
+
+    def get_webapp_browser(self):
+        browser_path = str(self.data.path)
+        for browser in DefaultBrowsersPathes.supported_browsers:
+            if browser in browser_path.lower():
+                self.browser = browser.replace(".exe", "").capitalize()
+                break
+    
+    def configure_grid(self):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.label_title = CTkLabel(self, text="Meu webapp")
-        self.label_title.grid(row=0, column=0)
+    def create_widgets(self):
+        icon = Image.open(self.data.icon)
+        self.image_icon = CTkImage(light_image=icon, dark_image=icon, size=(30,30))
 
-        self.label_browser = CTkLabel(self, text="Chromium")
-        self.label_browser.grid(row=1, column=0)
+        self.frame_title = CTkFrame(self)
+        self.frame_title.grid(row=0,column=0,padx=5,pady=5)
 
-        self.button_remove = CTkButton(self, text="Remover")
-        self.button_remove.grid(row=1, column=1)
+        self.frame_details = CTkFrame(self)
+        self.frame_details.grid(row=1,column=0, padx=5, pady=5)
 
-        icon = Image.open(os.path.join(Pathes.get_icons_directory(), "titulo"))
-        self.image_icon = CTkImage(light_image=icon, dark_image=icon)
+        self.label_image = CTkLabel(self.frame_title, text="", image=self.image_icon)
+        self.label_image.grid(row=0, column=0)
 
+        self.label_title = CTkLabel(self.frame_title, text=self.title, font=CTkFont(family="Roboto", size=20), anchor="w")
+        self.label_title.grid(row=0, column=1, padx=5, pady=5)
+
+        self.label_browser = CTkLabel(self.frame_details, text=self.browser)
+        self.label_browser.grid(row=0, column=0)
+
+        incognito_mode = f"({Language.incognito_mode_message})" if "--incognito" in self.data.arguments else f"({Language.keep_data_mode_message})"
+        self.label_incognito = CTkLabel(self.frame_details, text=incognito_mode)
+        self.label_incognito.grid(row=0, column=1, padx=5, pady=5)
+
+        self.button_remove = CTkButton(self, text=Language.tab_remove, command=self.remove_webapp)
+        self.button_remove.grid(row=1, column=1, padx=(0,7))
+
+
+    def remove_webapp(self):
+        os.remove(self.data.file)
+        self.destroy()

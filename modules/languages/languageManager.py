@@ -22,6 +22,9 @@ class Language:
     checkbox_incognito_mode: str
     auto_title_warning: str
 
+    incognito_mode_message: str
+    keep_data_mode_message: str
+
     @classmethod
     def load_language(cls, json_data):
         logger.info("Language json loaded")

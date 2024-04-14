@@ -12,5 +12,8 @@
 
   "switch_auto_title": "Título automático",
   "checkbox_incognito_mode": "Modo anônimo",
-  "auto_title_warning": "O título automático está ativo"
+  "auto_title_warning": "O título automático está ativo",
+
+  "incognito_mode_message": "Modo anônimo",
+  "keep_data_mode_message": "Manter dados"
 }

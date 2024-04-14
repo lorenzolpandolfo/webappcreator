@@ -13,8 +13,7 @@ class CurrentWebapps:
                 shortcut_path = os.path.join(Application.shortcut_path, file)
                 arguments = CurrentWebapps._read_shortcut_argument_(shortcut_path)
                 if Application.signature in arguments and file not in current_created_webapps:
-                    current_created_webapps.append(Lnk(file))
-        Application.current_webapps = current_created_webapps
+                    current_created_webapps.append(Lnk(shortcut_path))
         return current_created_webapps
 
     @staticmethod

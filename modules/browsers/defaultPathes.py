@@ -1,4 +1,7 @@
 class DefaultBrowsersPathes:
+    supported_browsers = ["firefox.exe", "chromium.exe", "chromium", "chrome.exe"]
+
+
     hash = {
         "Google Chrome" : r"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
         "Firefox"       : r"C:\\Program Files\\Mozilla Firefox\\firefox.exe",
