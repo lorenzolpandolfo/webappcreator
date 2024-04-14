@@ -3,7 +3,7 @@
   "tab_remove": "Удалить",
 
   "label_url": "Введите URL",
-  "label_title": "Введите заголовок WebApp",
+  "label_title": "Введите заголовок веб-приложения",
   "label_browser_selector": "Выберите браузер",
   "label_browser_path": "Проверьте путь к браузеру:",
 
@@ -12,5 +12,8 @@
 
   "switch_auto_title": "Автоматический заголовок",
   "checkbox_incognito_mode": "Режим инкогнито",
-  "auto_title_warning": "Автоматический заголовок активен"
+  "auto_title_warning": "Автоматический заголовок включен",
+
+  "incognito_mode_message": "Режим инкогнито",
+  "keep_data_mode_message": "Сохранить данные"
 }

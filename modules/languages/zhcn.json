@@ -2,15 +2,18 @@
   "tab_create": "创建",
   "tab_remove": "删除",
 
-  "label_url": "输入网址",
-  "label_title": "输入 WebApp 标题",
+  "label_url": "输入 URL",
+  "label_title": "输入 Web 应用标题",
   "label_browser_selector": "选择浏览器",
-  "label_browser_path": "验证浏览器路径：",
+  "label_browser_path": "查看浏览器路径:",
 
   "button_select_local_icon": "浏览本地图标",
   "button_create_webapp": "创建",
 
   "switch_auto_title": "自动标题",
   "checkbox_incognito_mode": "隐身模式",
-  "auto_title_warning": "自动标题处于活动状态"
+  "auto_title_warning": "自动标题已启用",
+
+  "incognito_mode_message": "隐身模式",
+  "keep_data_mode_message": "保存数据"
 }

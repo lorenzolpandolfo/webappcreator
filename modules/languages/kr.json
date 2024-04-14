@@ -12,5 +12,8 @@
 
   "switch_auto_title": "자동 제목",
   "checkbox_incognito_mode": "시크릿 모드",
-  "auto_title_warning": "자동 제목 활성화"
+  "auto_title_warning": "자동 제목 활성화",
+
+  "incognito_mode_message": "시크릿 모드",
+  "keep_data_mode_message": "데이터 유지"
 }

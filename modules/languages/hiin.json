@@ -3,14 +3,17 @@
   "tab_remove": "हटाएं",
 
   "label_url": "URL दर्ज करें",
-  "label_title": "WebApp शीर्षक दर्ज करें",
+  "label_title": "वेबऐप शीर्षक दर्ज करें",
   "label_browser_selector": "ब्राउज़र चुनें",
   "label_browser_path": "ब्राउज़र पथ सत्यापित करें:",
 
-  "button_select_local_icon": "स्थानीय आइकन ब्राउज़ करें",
+  "button_select_local_icon": "स्थानीय चिह्न ब्राउज़ करें",
   "button_create_webapp": "बनाएं",
 
   "switch_auto_title": "स्वचालित शीर्षक",
-  "checkbox_incognito_mode": "अनिर्वाचक मोड",
-  "auto_title_warning": "स्वचालित शीर्षक सक्रिय है"
+  "checkbox_incognito_mode": "गुप्त मोड",
+  "auto_title_warning": "स्वचालित शीर्षक सक्रिय",
+
+  "incognito_mode_message": "गुप्त मोड",
+  "keep_data_mode_message": "मैन्टेन डेटा"
 }

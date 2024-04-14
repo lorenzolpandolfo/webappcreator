@@ -2,15 +2,18 @@
   "tab_create": "إنشاء",
   "tab_remove": "إزالة",
 
-  "label_url": "أدخل عنوان الويب",
-  "label_title": "أدخل عنوان WebApp",
-  "label_browser_selector": "اختر المتصفح",
-  "label_browser_path": "تحقق من مسار المتصفح:",
+  "label_url": "أدخل عنوان URL",
+  "label_title": "أدخل عنوان تطبيق الويب",
+  "label_browser_selector": "اختيار المتصفح",
+  "label_browser_path": "التحقق من مسار المتصفح:",
 
-  "button_select_local_icon": "تصفح الرمز المحلي",
+  "button_select_local_icon": "استعراض الرمز المحلي",
   "button_create_webapp": "إنشاء",
 
   "switch_auto_title": "عنوان تلقائي",
-  "checkbox_incognito_mode": "وضع التصفح المتخفي",
-  "auto_title_warning": "عنوان تلقائي نشط"
+  "checkbox_incognito_mode": "وضع التصفح الخفي",
+  "auto_title_warning": "العنوان التلقائي فعال",
+
+  "incognito_mode_message": "وضع التصفح الخفي",
+  "keep_data_mode_message": "الاحتفاظ بالبيانات"
 }

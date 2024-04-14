@@ -2,15 +2,18 @@
   "tab_create": "Crear",
   "tab_remove": "Eliminar",
 
-  "label_url": "Introduzca la URL",
-  "label_title": "Introduzca el título de la WebApp",
-  "label_browser_selector": "Seleccione el navegador",
-  "label_browser_path": "Verifique la ruta del navegador:",
+  "label_url": "Ingresar URL",
+  "label_title": "Ingresar título de la aplicación web",
+  "label_browser_selector": "Seleccionar navegador",
+  "label_browser_path": "Verificar ruta del navegador:",
 
   "button_select_local_icon": "Examinar icono local",
   "button_create_webapp": "Crear",
 
   "switch_auto_title": "Título automático",
   "checkbox_incognito_mode": "Modo incógnito",
-  "auto_title_warning": "El título automático está activo"
+  "auto_title_warning": "El título automático está activo",
+
+  "incognito_mode_message": "Modo incógnito",
+  "keep_data_mode_message": "Mantener datos"
 }

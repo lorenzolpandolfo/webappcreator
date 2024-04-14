@@ -12,5 +12,8 @@
 
   "switch_auto_title": "Auto Title",
   "checkbox_incognito_mode": "Incognito Mode",
-  "auto_title_warning": "Auto Title is active"
+  "auto_title_warning": "Auto Title is active",
+
+  "incognito_mode_message": "Incognito mode",
+  "keep_data_mode_message": "Keep data"
 }
