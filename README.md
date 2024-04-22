@@ -28,7 +28,6 @@ Most of the translations were made with artificial intelligence. If you are a na
 ### TODO:
 - Firefox currently not working
 - Manual icon choose not implemented yet
-- "Remove" tab to remove your created webapps
 - Some code cleaning
 
 ### This app is Windows only
