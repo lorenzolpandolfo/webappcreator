@@ -1,0 +1,6 @@
+requests
+pywin32
+pillow
+winshell
+customtkinter
+pylnk3
