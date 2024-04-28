@@ -11,24 +11,30 @@ Provides you a graphical user interface to create webapps in a simple way.
 The default software language is english, but it supports more languages. To change the software language, edit the `preferences.json` file and set the language value to your language code.
 
 Currently, the interface supports:
-- Brazilian Portuguese
-- English
-- Hindi
-- Mandarin
-- Russian
-- Spanish
-- Arabian
-- Japanese
-- Korean
-- Dutch
+```
+ptbr - Brazilian Portuguese
+eng  - English
+hiin - Hindi
+zhcn - Mandarin
+rus  - Russian
+es   - Spanish
+ar   - Arabian
+jp   - Japanese
+kr   - Korean
+du   - Dutch
+```
 
 Most of the translations were made with artificial intelligence. If you are a native speaker and would like to improve it, feel free to open an issue.
 
+### Example of how to load brazilian portuguese language:
+- Edit preferences.json:
+  `{ "language": "ptbr" }`
+- Save and restart WebApp Creator
 
-### TODO:
+## TODO:
 - Firefox currently not working
 - Manual icon choose not implemented yet
 - Some code cleaning
 
-### This app is Windows only
+## This app is Windows only
 If you would like to use a WebApp Creator in Linux, use [this](https://github.com/linuxmint/webapp-manager) alternative.
